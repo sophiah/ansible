@@ -1,0 +1,4 @@
+---
+repodirs:
+  - /data/yum/rhel/6/x86_64
+  - /data/yum/rhel/6/noarch
