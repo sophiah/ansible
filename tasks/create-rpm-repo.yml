@@ -1,0 +1,20 @@
+---
+- name: install necessary packages
+  yum: name={{ item }} state=present
+  with_items:
+    - createrepo
+
+- name: create user group service
+  group: name=service
+
+- name: create user rpmrepo
+  user: name=rpmrepo group=service
+
+- name: create repository directory
+  file: path={{ item }} state=directory group=service owner=rpmrepo
+  with_items: repodirs
+
+- name: init repository directory
+  shell: createrepo {{ item }}
+  sudo_user: rpmrepo
+  with_items: repodirs
