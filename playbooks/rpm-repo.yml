@@ -1,6 +1,9 @@
 ---
 - hosts: rpm-repo
   sudo: True
+  vars:
+    http_port: 8080
+    http_document_root: "/data/yum"
   roles:
     - rpm-repo
     - httpd

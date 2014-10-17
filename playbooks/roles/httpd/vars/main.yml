@@ -1,0 +1,11 @@
+---
+http_port: 80
+http_document_root: "/var/www/html"
+http_server_admin: root@localhost
+http_error_log: logs/error_log
+http_log_level: warn
+http_pid_file: run/httpd.pid
+http_timeout: 60
+http_keep_alive: Off
+http_keep_alive_timeout: 10
+http_max_keep_alive_requests: 100

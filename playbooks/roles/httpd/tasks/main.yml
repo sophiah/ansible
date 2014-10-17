@@ -11,7 +11,7 @@
   user: name=httpd group=service
 
 - name: copy default httpd conf
-  copy: src={{ item.src }} dest={{ item.dest }}
+  template: src={{ item.src }} dest={{ item.dest }}
   with_items:
     - { src: "../files/httpd.conf", dest: "/etc/httpd/conf/httpd.conf"}
     - { src: "../files/00-0-defaultload.conf", dest: "/etc/httpd/conf.d/00-0-defaultload.conf" }
@@ -20,3 +20,15 @@
     - { src: "../files/01-module-mime.conf", dest: "/etc/httpd/conf.d/01-module-mime.conf" }
     - { src: "../files/01-module-dirmodule.conf", dest: "/etc/httpd/conf.d/01-module-dirmodule.conf" }
     - { src: "../files/02-default-directory.conf", dest: "/etc/httpd/conf.d/02-default-directory.conf" }
+
+- name: Check if http port is allowed
+  shell: iptables -L | grep -q "Allow http"
+  register: check_allow_http
+  ignore_errors: yes
+  changed_when: no
+  always_run: yes
+
+- name: Allow port
+  command: >
+    iptables -A INPUT -p tcp -m tcp --dport {{ http_port }} -m comment --comment "Allow http port {{ http_port }}" -j ACCEPT
+  when: check_allow_http.rc != 0
