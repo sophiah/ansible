@@ -1,3 +1,16 @@
 ---
-- name: copy httpd configuration
+- name: create httpd/conf.d directory
+  file: path=/etc/httpd/conf.d state=directory
 
+- name: get security content
+  shell: ls -la --context /var/www/html | head -1 | awk '{ print $4}'
+  register: repo_sec_content
+
+- name: change security content
+  command: chcon -R {{ item }} {{ http_document_root }}
+  with_items: repo_sec_content.stdout_lines
+
+- name: copy default httpd conf
+  template: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: "../files/05-rpm-repo-dir-permission.conf", dest: "/etc/httpd/conf.d/05-rpm-repo-dir-permission.conf"}

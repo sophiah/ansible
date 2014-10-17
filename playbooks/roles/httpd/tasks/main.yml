@@ -36,5 +36,5 @@
     - Save iptables and Restart
 
 - name: start httpd service
-  service: name=httpd state=started
+  service: name=httpd state=restarted
 

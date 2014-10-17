@@ -18,3 +18,4 @@
   shell: createrepo {{ item }}
   sudo_user: rpmrepo
   with_items: repodirs
+
