@@ -1,13 +1,6 @@
 ---
 - hosts: rpm-repo
+  sudo: True
   roles:
     - rpm-repo
     - httpd
-  sudo: True
-#   vars:
-#     repodirs:
-#       - /data/yum/rhel/6/x86_64
-#       - /data/yum/rhel/6/noarch
-#   tasks:
-#     - include: ../tasks/create-rpm-repo.yml
-#     - include: ../tasks/install-httpd.yml

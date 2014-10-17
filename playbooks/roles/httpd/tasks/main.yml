@@ -10,3 +10,13 @@
 - name: create user httpd
   user: name=httpd group=service
 
+- name: copy default httpd conf
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: "../files/httpd.conf", dest: "/etc/httpd/conf/httpd.conf"}
+    - { src: "../files/00-0-defaultload.conf", dest: "/etc/httpd/conf.d/00-0-defaultload.conf" }
+    - { src: "../files/00-0-processConfig.conf", dest: "/etc/httpd/conf.d/00-0-processConfig.conf" }
+    - { src: "../files/00-zz-icon.conf", dest: "/etc/httpd/conf.d/00-zz-icon.conf" }
+    - { src: "../files/01-module-mime.conf", dest: "/etc/httpd/conf.d/01-module-mime.conf" }
+    - { src: "../files/01-module-dirmodule.conf", dest: "/etc/httpd/conf.d/01-module-dirmodule.conf" }
+    - { src: "../files/02-default-directory.conf", dest: "/etc/httpd/conf.d/02-default-directory.conf" }
