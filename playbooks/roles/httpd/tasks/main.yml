@@ -30,5 +30,11 @@
 
 - name: Allow port
   command: >
-    iptables -A INPUT -p tcp -m tcp --dport {{ http_port }} -m comment --comment "Allow http port {{ http_port }}" -j ACCEPT
+    iptables -A INPUT -p tcp -m tcp --dport {{ http_port }} -m state --state New -m comment --comment "Allow http port {{ http_port }}" -j ACCEPT
   when: check_allow_http.rc != 0
+  notify:
+    - Save iptables and Restart
+
+- name: start httpd service
+  service: name=httpd state=started
+
