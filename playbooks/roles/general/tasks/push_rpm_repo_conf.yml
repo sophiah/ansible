@@ -1,5 +1,0 @@
----
-- name : copy repo config
-  get_url: url={{ item.url }} dest={{ item.dest }}
-  when: rpm_repo_urls is defined
-

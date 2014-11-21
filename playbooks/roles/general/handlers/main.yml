@@ -1,7 +1,0 @@
----
-- name: Save iptables and Restart
-  shell: iptables-save > /etc/sysconfig/iptables
-  notify: Restart iptables
-
-- name: Restart iptables
-  service: name=iptables state=restarted

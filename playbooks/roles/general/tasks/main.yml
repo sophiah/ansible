@@ -1,7 +1,0 @@
----
-- include: reset_ip_table.yml
-  when: new_server is defined and new_server == "Yes"
-
-- include: push_rpm_repo_conf.yml
-
-- include: common.yml
