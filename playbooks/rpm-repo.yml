@@ -1,10 +1,30 @@
 ---
 - hosts: rpm-repo
   sudo: True
-  vars:
-    http_port: 80
-    http_document_root: "/data/yum"
   roles:
     - general
     - rpm-repo
     - httpd
+  vars:
+    http_port: 80
+    http_document_root: "/data/yum"
+    repodir_root: /data/yum
+    repodirs:
+      - { dir: "/rhel/6/x86_64"      , name: "RHEL_6_x86_64" }
+      - { dir: "/rhel/6/noarch"      , name: "RHEL_6_noarch" }
+      - { dir: "/rhel/6/python26rpms", name: "RHEL_6_python26" }
+
+    ####  copy rpm from git repository directly
+    rpm_copy_list:
+      - { src: "../../rhel/6/x86_64/", dest: "/rhel/6/x86_64" }
+      - { src: "../../rhel/6/noarch/", dest: "/rhel/6/noarch" }
+
+    #### download rpm from URL
+    ## rpm_download:
+    ##    - { src: "example_url", dest: "/path/related/to {{ repodir_root }}" }
+    
+    #### fpm to RPM variables
+    # fpm_rpm_repository_root: /data/yum/rhel/6/
+    # fpm_python_list:
+    #   - bson==0.3.3
+    

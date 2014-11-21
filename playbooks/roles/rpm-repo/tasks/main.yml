@@ -1,2 +1,11 @@
+- include: packages.yml
 - include: create-rpm-repo.yml
 - include: push-httpd-conf.yml
+
+- include: download-default-rpms.yml
+  tags: update
+  when: copy_init_rpms is defined and copy_init_rpms == "Yes"
+
+- include: build_fpm.yml
+  tags: update
+  when: build_fpm is defined and build_fpm == "Yes" and fpm_rpm_repository_root is defined

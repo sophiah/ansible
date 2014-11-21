@@ -1,0 +1,37 @@
+- name: install packages for fpm
+  yum: name={{ item }} state=present
+  with_items:
+  - ruby-devel
+  - gcc
+  - rubygems
+
+- name: install gem
+  gem: name=fpm state=latest user_install=no
+
+- name: mkdir dir for rpm temp
+  command: mkdir -p /tmp/fpm/
+
+- name: register current python version for package prefix
+  command: python -c "import sys; print 'python%s%s' % (sys.version_info[0], sys.version_info[1]) "
+  register: python_version
+  tags: add_new_fpms
+
+- name: remove fpm-rpm temp
+  command: find /tmp/fpm -regex ".*rpm" -exec rm {} \;
+  tags: add_new_fpms
+
+- name: generate python package into rpm
+  command: fpm -p /tmp/fpm -s python -t rpm {{ item }}
+  with_items: fpm_python_list
+  when: fpm_python_list is defined
+  tags: add_new_fpms
+
+- name: move all fpm-rpm to repository
+  command: find /tmp/fpm -regex ".*rpm" -exec cp {} {{ fpm_rpm_repository_root }}/{{ python_version.stdout }}rpms \;
+  tags: add_new_fpms
+  notify: Update RPM Repository
+
+- name: remove fpm-rpm temp
+  command: find /tmp/fpm -regex ".*rpm" -exec rm {} \;
+  tags: add_new_fpms
+

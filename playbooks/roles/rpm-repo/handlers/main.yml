@@ -1,0 +1,3 @@
+---
+- name: Update RPM Repository
+  command: /usr/local/bin/update_rpm_repository.sh

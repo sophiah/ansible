@@ -14,3 +14,4 @@
   template: src={{ item.src }} dest={{ item.dest }}
   with_items:
     - { src: "../files/05-rpm-repo-dir-permission.conf", dest: "/etc/httpd/conf.d/05-rpm-repo-dir-permission.conf"}
+
