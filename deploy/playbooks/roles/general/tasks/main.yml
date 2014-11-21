@@ -1,0 +1,10 @@
+---
+
+- name : copy default ip table - open port 22 only
+  template: src={{ item.src }} dest={{ item.dest }}
+  when: new_server is defined and new_server == "Yes"
+  with_items:
+    - { src: "../files/iptables", dest: "/etc/sysconfig/iptables"}
+
+- name: Restart iptables
+  service: name=iptables state=restarted

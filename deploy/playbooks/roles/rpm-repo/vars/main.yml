@@ -1,0 +1,6 @@
+---
+reponame_prefix: cust
+reporoot: /data/yum
+repodirs:
+  - /rhel/el6/x86_64
+  - /rhel/el6/noarch

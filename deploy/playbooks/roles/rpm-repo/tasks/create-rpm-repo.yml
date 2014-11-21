@@ -1,0 +1,23 @@
+---
+- name: install necessary packages
+  yum: name={{ item }} state=present
+  with_items:
+    - createrepo
+
+- name: create user group service
+  group: name=service
+
+- name: create user rpmrepo
+  user: name=rpmrepo group=service
+
+- name: create repository directory
+  file: path="{{ reporoot }}/{{ item.dir }}" state=directory group=service owner=rpmrepo
+  with_items: repodirs
+
+- name: init repository directory
+  shell: createrepo "{{ reporoot }}/{{ item.dir }}"
+  sudo_user: rpmrepo
+  with_items: repodirs
+
+- name: put rpm repo configuration to root
+  script: gen_rpm_repo_conf.sh {{ repodir_root }} {{ rpm_repo_prefix }}

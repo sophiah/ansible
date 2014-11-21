@@ -6,6 +6,7 @@
     - rpm-repo
     - httpd
   vars:
+    rpm_repo_prefix: cust
     http_port: 80
     http_document_root: "/data/yum"
     repodir_root: /data/yum

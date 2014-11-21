@@ -1,0 +1,24 @@
+- name: install epel
+  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+
+- name: install packages
+  yum: name={{ item }} state=present
+  with_items:
+    - createrepo
+    - python
+    - libselinux-python
+    - rpm-build
+    - python-devel
+    - python-pip
+    - libxml2
+    - libxml2-devel
+    - python-setuptools
+    - zlib-devel
+    - wget
+    - openssl-devel
+    - pcre
+    - pcre-devel
+    - gcc
+    - make
+    - autoconf
+    - automake

@@ -1,0 +1,12 @@
+---
+- name: copy rpm_copy_list
+  copy: src={{ item.src }} dest={{ repodir_root }}/{{ item.dest }} mode=0644 owner=rpmrepo group=service
+  when: rpm_copy_list is defined
+  notify: Update RPM Repository
+  with_items: rpm_copy_list
+
+- name: download files
+  get_url: url={{ item.src }} dest={{ repodir_root }}/{{ item.dest }} mode=0644 owner=rpmrepo group=service
+  when: rpm_download is defined
+  notify: Update RPM Repository
+  with_items: rpm_download

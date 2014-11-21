@@ -1,0 +1,8 @@
+
+[rpm-repo:children]
+rpm-repo-aws
+
+[rpm-repo-aws]
+ec2-54-148-188-230.us-west-2.compute.amazonaws.com
+
+

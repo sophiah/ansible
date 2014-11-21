@@ -1,8 +1,0 @@
-
-[rpm-repo:children]
-rpm-repo-aws
-
-[rpm-repo-aws]
-ec2-54-69-16-22.us-west-2.compute.amazonaws.com new_server=No
-
-

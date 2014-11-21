@@ -1,0 +1,7 @@
+---
+- name: Save iptables and Restart
+  command: iptables-save
+  notify: Restart iptables
+
+- name: Restart iptables
+  service: name=iptables state=restarted
