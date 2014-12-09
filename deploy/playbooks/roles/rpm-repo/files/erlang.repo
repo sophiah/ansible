@@ -1,0 +1,6 @@
+[erlang]
+name=Centos $releasever - $basearch - Erlang Solutions
+baseurl=http://packages.erlang-solutions.com/rpm/centos/6/$basearch
+gpgcheck=1
+gpgkey=http://packages.erlang-solutions.com/rpm/erlang_solutions.asc
+enabled=1

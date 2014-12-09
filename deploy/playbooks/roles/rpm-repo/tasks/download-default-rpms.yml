@@ -10,3 +10,9 @@
   when: rpm_download is defined
   notify: Update RPM Repository
   with_items: rpm_download
+
+- name: sync repo repository
+  shell: reposync -n --repoid={{ item.name }} -p {{ repodir_root }}/{{ item.dest }}
+  when: sync_repoids is defined
+  notify: Update RPM Repository
+  with_items: sync_repoids

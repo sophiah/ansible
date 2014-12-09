@@ -1,6 +1,7 @@
 ---
 - hosts: rpm-repo
   sudo: True
+  tags: rpm-repo
   roles:
     - general
     - rpm-repo
@@ -14,18 +15,37 @@
       - { dir: "/rhel/6/x86_64"      , name: "RHEL_6_x86_64" }
       - { dir: "/rhel/6/noarch"      , name: "RHEL_6_noarch" }
       - { dir: "/rhel/6/python26rpms", name: "RHEL_6_python26" }
+      - { dir: "/rhel/6/epel"        , name: "RHEL_6_epel" }
+      - { dir: "/rhel/6/erlang"      , name: "RHEL_6_erlang" }
 
     ####  copy rpm from git repository directly
     rpm_copy_list:
       - { src: "../../rhel/6/x86_64/", dest: "/rhel/6/x86_64" }
       - { src: "../../rhel/6/noarch/", dest: "/rhel/6/noarch" }
 
+    sync_repoids:
+      - { name: "erlang", dest: "/rhel/6" }
+
     #### download rpm from URL
-    ## rpm_download:
-    ##    - { src: "example_url", dest: "/path/related/to {{ repodir_root }}" }
+    rpm_download:
+      - { src: "http://www.rabbitmq.com/releases/rabbitmq-server/v3.4.2/rabbitmq-server-3.4.2-1.noarch.rpm", dest: "/rhel/6/noarch" }
     
     #### fpm to RPM variables
-    # fpm_rpm_repository_root: /data/yum/rhel/6/
-    # fpm_python_list:
-    #   - bson==0.3.3
-    
+    fpm_rpm_repository_root: /data/yum/rhel/6
+    fpm_python_list:
+       - supervisor==3.1.3
+
+- hosts: mq
+  sudo: True
+  tags: mq
+  roles:
+    - general
+    - mq
+  vars:
+    repo_files:
+      - cust.rhel_6_erlang.conf
+      - cust.rhel_6_noarch.conf
+      - cust.rhel_6_python26rpms.conf
+      - cust.rhel_6_x86_64.conf
+
+

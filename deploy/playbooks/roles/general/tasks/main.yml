@@ -8,3 +8,7 @@
 
 - name: Restart iptables
   service: name=iptables state=restarted
+
+- include: repo_config.yml
+- include: packages.yml
+

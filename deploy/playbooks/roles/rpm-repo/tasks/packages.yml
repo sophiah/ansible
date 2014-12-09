@@ -1,5 +1,9 @@
-- name: install epel
-  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+
+- name: install erlang
+  shell: rpm --import http://packages.erlang-solutions.com/rpm/erlang_solutions.asc
+
+- name: put erlang repo file
+  copy: src=erlang.repo dest=/etc/yum.repos.d/erlang.repo
 
 - name: install packages
   yum: name={{ item }} state=present
