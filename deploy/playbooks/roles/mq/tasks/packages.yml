@@ -19,6 +19,6 @@
     - 15672
     - 5672
     - 4369
-  when: check_allow_mq.rc != 0
+  when: check_allow_mq.rc == 0
   notify:
     - Save iptables and Restart

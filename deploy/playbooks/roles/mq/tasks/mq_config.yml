@@ -5,3 +5,4 @@
     - { src: "../files/rabbitmq-env.conf", dest: "/etc/rabbitmq/rabbitmq-env.conf", mode: "0644" }
     - { src: "../files/rabbitmq.config", dest: "/etc/rabbitmq/rabbitmq.conf", mode: "0644" }
     - { src: "../files/erlang.cookie", dest: "/var/lib/rabbitmq/.erlang.cookie", mode: "0600" }
+    - { src: "../files/supervisor-mq.conf", dest: "/etc/supervisor/supervisor-mq.conf", mode: "0644" }

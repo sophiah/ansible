@@ -5,7 +5,7 @@
     - http://ftp.yzu.edu.tw/Linux/Fedora-EPEL/6/i386/epel-release-6-8.noarch.rpm
 
 - name: copy repo config file
-  get_url: url=http://{{ repo_server }}/{{ item }} dest=/etc/yum.repos.d/{{ item }}
+  get_url: url=http://{{ repo_server }}/{{ item }} dest=/etc/yum.repos.d/{{ item }}.repo
   when: repo_files is defined
   with_items: repo_files
 
