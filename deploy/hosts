@@ -6,7 +6,7 @@ ec2-54-149-123-138.us-west-2.compute.amazonaws.com mq_nodename=mq1 mq_cookie=ttt
 
 
 [rpm-repo-aws]
-ec2-54-148-188-230.us-west-2.compute.amazonaws.com
+ec2-54-148-188-230.us-west-2.compute.amazonaws.com 
 
 [rpm-repo:children]
 rpm-repo-aws

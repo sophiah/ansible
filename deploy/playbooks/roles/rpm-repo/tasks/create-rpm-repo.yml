@@ -16,7 +16,6 @@
 
 - name: init repository directory
   shell: createrepo "{{ reporoot }}/{{ item.dir }}"
-  sudo_user: rpmrepo
   with_items: repodirs
 
 - name: put rpm repo configuration to root

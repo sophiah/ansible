@@ -1,0 +1,24 @@
+
+- name: install packages
+  yum: name={{ item }} state=present
+  with_items:
+    - python-supervisor
+
+- name: group service
+  group: name=service
+
+- name: supervisor user
+  user: name=supervisor group=service
+
+- name: create dir for supervisord
+  file: dest={{ item.path }} mode={{ item.mode }} owner=supervisor group=service state=directory
+  with_items:
+   - { path: "/var/run", mode: "0775" }
+   - { path: "/var/log/supervisor", mode: "0755" }
+   - { path: "/etc/supervisor", mode: "0644" }
+
+- name: config basic supervisor
+  copy: src={{ item.src }} dest={{ item.dest }} mode={{ item.mode }}
+  with_items:
+    - { src : "supervisord.conf", dest : "/etc/supervisord.conf", mode: "0644" }
+    - { src : "supervisord.init.sh", dest : "/etc/init.d/supervisord", mode: "0755" }
