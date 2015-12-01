@@ -17,7 +17,7 @@
   unarchive: src="/usr/{{ jdk_tarball_file }}.tar.gz" dest="/usr/{{ jdk_tarball_file }}" mode="u=rwx,g=rx,o=rx" copy=no
 
 - name: move files
-  command: mv /usr/{{ jdk_tarball_file }}/*/* /usr/{{ jdk_tarball_file }}
+  command: mv /usr/{{ jdk_tarball_file }}/jdk*/* /usr/{{ jdk_tarball_file }}
 
 - name: link jdk
   file: src="/usr/{{ jdk_tarball_file }}" dest=/usr/j2se state=link
