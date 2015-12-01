@@ -1,0 +1,23 @@
+---
+# file: tasks/set-role-variables.yml
+# set necessary role variables.
+#
+
+- name: set tomcat for 9.0.0.M1
+  set_fact:
+    tomcat_tarball_url:  http://ftp.twaren.net/Unix/Web/apache/tomcat/tomcat-9/v9.0.0.M1/bin/apache-tomcat-9.0.0.M1.tar.gz
+  when: tomcat_version == 9.0.0.M1
+
+
+- name: set tomcat for 8.0.29
+  set_fact:
+    tomcat_tarball_url:  http://ftp.twaren.net/Unix/Web/apache/tomcat/tomcat-8/v8.0.29/bin/apache-tomcat-8.0.29.tar.gz
+  when: tomcat_version == 8.0.29
+
+
+- name: set tomcat for 7.0.65
+  set_fact:
+    tomcat_tarball_url:  http://ftp.tc.edu.tw/pub/Apache/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.zip
+  when: tomcat_version == 7.0.65
+
+

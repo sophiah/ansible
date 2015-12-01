@@ -1,7 +1,9 @@
 ---
 - hosts: gatling_master
   sudo: True
-  tags: [ gatling, gatling_master ]
+  tags: 
+    - gatling
+    - gatling_master
   roles:
     - tomcat
     - gatling
@@ -12,7 +14,9 @@
 
 - hosts: gatling_slave
   sudo: True
-  tags: [ gatling, gatling_slave ]
+  tags: 
+    - gatling
+    - gatling_slave
   roles:
     - gatling
   vars:
