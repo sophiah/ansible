@@ -2,4 +2,5 @@
 ## nginx
 
 - name: install nginx from yum
-  yum: nginx
+  yum: name=nginx state=latest
+  notify: restart nginx
