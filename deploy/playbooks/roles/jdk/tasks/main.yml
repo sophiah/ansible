@@ -11,7 +11,7 @@
   get_url: url="{{ jdk_tarball_url }}.tar.gz" dest="/usr/{{ jdk_tarball_file }}.tar.gz" mode="u=rwx,g=r,o=r" headers="Cookie:oraclelicense=accept-securebackup-cookie"
 
 - name: untar the jdk
-  command: chdir=/usr /bin/tar xvf /usr/{{ jdk_tarball_file }}.tar.gz -C /usr/{{ jdk_tarball_file }} -strip 1 creates=/usr/{{ jdk_tarball_file }}
+  command: chdir=/usr /bin/tar xvf /usr/{{ jdk_tarball_file }}.tar.gz -C /usr/{{ jdk_tarball_file }} --strip=1 creates=/usr/{{ jdk_tarball_file }}
 
-- name: link jdk
+- name: link
   file: src="/usr/{{ jdk_tarball_file }}" dest=/usr/j2se state=link
