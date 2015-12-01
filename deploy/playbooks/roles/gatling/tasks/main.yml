@@ -7,7 +7,7 @@
   command: chdir=/usr creates="{{ gatling_dest }}" bash -c "unzip -d {{ gatling_dest }} {{ gatling_dest }}.zip && f=("{{ gatling_dest }}"/*) && mv "{{ gatling_dest }}"/*/* "{{ gatling_dest }}" && rmdir "${f[@]}""
 
 - name: link
-  file: src=""{{ gatling_dest }}"" dest=/usr/local/gatling state=link
+  file: src="{{ gatling_dest }}" dest=/usr/local/gatling state=link
 
 - name: put master fun file
   template: src=gatling_cluster_master.sh dest=/usr/local/gatling/bin/gatling_cluster_master.sh mode="u=rwx,g=rx,o=rx"
