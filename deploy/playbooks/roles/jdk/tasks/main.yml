@@ -15,4 +15,4 @@
   unarchive: src="/usr/jdk-{{ jdk_version }}.tar.gz" dest="/usr/" mode="u=rwx,g=rx,o=rx" copy=no
 
 - name: link jdk
-  file: src="/usr/jdk-{{ jdk_version }}" dest=/usr/j2se state=link
+  file: src="/usr/jdk{{ jdk_version }}" dest=/usr/j2se state=link
