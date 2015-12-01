@@ -14,7 +14,7 @@
   file: path="/usr/{{ jdk_tarball_file }}" mode="u=rwx,g=rx,o=rx" state=directory
 
 - name: untar the jdk
-  unarchive: src="/usr/{{ jdk_version }}.tar.gz" dest="/usr/{{ jdk_tarball_file }}" mode="u=rwx,g=rx,o=rx" copy=no
+  unarchive: src="/usr/{{ jdk_tarball_file }}.tar.gz" dest="/usr/{{ jdk_tarball_file }}" mode="u=rwx,g=rx,o=rx" copy=no
 
 - name: move files
   command: mv /usr/{{ jdk_tarball_file }}/*/* /usr/{{ jdk_tarball_file }}
