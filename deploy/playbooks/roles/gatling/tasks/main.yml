@@ -1,7 +1,19 @@
 ---
 
 - name : get gatling files
-  get_url: url=https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/2.1.7/gatling-charts-highcharts-bundle-2.1.7-bundle.zip dest=/usr/local/gatling-2.1.7.zip
+  get_url: url="{{ gatling_download_url }}" dest="{{ gatling_dest }}.zip"
 
+- name: untar the gatling
+  command: chdir=/usr creates="{{ gatling_dest }}" bash -c "unzip -d {{ gatling_dest }} {{ gatling_dest }}.zip && f=("{{ gatling_dest }}"/*) && mv "{{ gatling_dest }}"/*/* "{{ gatling_dest }}" && rmdir "${f[@]}""
 
+- name: link
+  file: src=""{{ gatling_dest }}"" dest=/usr/local/gatling state=link
+
+- name: put master fun file
+  template: src=gatling_cluster_master.sh dest=/usr/local/gatling/bin/gatling_cluster_master.sh mode="u=rwx,g=rx,o=rx"
+  when: "'gatling_master' in group_names"
+
+- name: put slave fun file
+  template: src=gatling_cluster_slave.sh dest=/usr/local/gatling/bin/gatling_cluster_slave.sh mode="u=rwx,g=rx,o=rx"
+  when: "'gatling_slave' in group_names"
 
