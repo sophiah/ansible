@@ -1,0 +1,5 @@
+---
+## nginx
+
+- name: install nginx from yum
+  yum: nginx

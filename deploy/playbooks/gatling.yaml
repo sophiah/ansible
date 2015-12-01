@@ -5,8 +5,8 @@
     - gatling
     - gatling_master
   roles:
-    - tomcat
     - gatling
+    - nginx
   vars:
     is_gatling_master: True
     java_version: 7u80_x64

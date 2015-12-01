@@ -8,13 +8,13 @@
   fail: msg="ERROR - required variable 'tomcat_version' missing."
   when: tomcat_version is not defined
 
-# - include: set-role-variables.yml
+- include: set-role-variables.yml
 
-# - name: get tomcat tarball (as tar.gz file)
-#   get_url: url="{{ tomcat_tarball_url }}" dest="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" mode="u=rwx,g=r,o=r"
+- name: get tomcat tarball (as tar.gz file)
+  get_url: url="{{ tomcat_tarball_url }}" dest="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" mode="u=rwx,g=r,o=r"
 
-# - name: untar the jdk
-#   unarchive: src="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" dest="/usr/local/tomcat-{{ tomcat_version }}" mode="u=rwx,g=rx,o=rx" copy=no
+- name: untar the jdk
+  unarchive: src="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" dest="/usr/local/tomcat-{{ tomcat_version }}" mode="u=rwx,g=rx,o=rx" copy=no
 
-# - name: link jdk
-#   file: src="/usr/local/tomcat-{{ tomcat_version }}" dest=/usr/local/tomcat state=link
+- name: link jdk
+  file: src="/usr/local/tomcat-{{ tomcat_version }}" dest=/usr/local/tomcat state=link
