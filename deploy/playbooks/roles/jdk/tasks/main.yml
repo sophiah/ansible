@@ -10,6 +10,9 @@
 - name: get JDK tarball (as tar.gz file)
   get_url: url="{{ jdk_tarball_url }}.tar.gz" dest="/usr/{{ jdk_tarball_file }}.tar.gz" mode="u=rwx,g=r,o=r" headers="Cookie:oraclelicense=accept-securebackup-cookie"
 
+- name: create dir
+  file: path="/usr/{{ jdk_tarball_file }}" mode="u=rwx,g=rx,o=rx" state=directory
+
 - name: untar the jdk
   unarchive: src="/usr/{{ jdk_tarball_file }}.tar.gz" dest="/usr/{{ jdk_tarball_file }}" mode="u=rwx,g=rx,o=rx" copy=no
 
