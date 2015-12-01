@@ -1,0 +1,20 @@
+---
+- hosts: gatling_master
+  sudo: True
+  tags: [ gatling, gatling_master ]
+  roles:
+    - tomcat
+    - gatling
+  vars:
+    is_gatling_master: True
+    java_version: 7u80_x64
+    http_port: 8080
+
+- hosts: gatling_slave
+  sudo: True
+  tags: [ gatling, gatling_slave ]
+  roles:
+    - gatling
+  vars:
+    is_gatling_master: False
+

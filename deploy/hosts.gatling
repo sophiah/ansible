@@ -1,0 +1,12 @@
+[all:vars]
+
+[gatling_master]
+
+
+
+[gatling_slave]
+
+
+[gatling:children]
+gatling_master
+gatling_slave
