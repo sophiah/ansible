@@ -8,13 +8,11 @@
 - include: set-role-variables.yml
 
 - name: get JDK tarball (as tar.gz file)
-  get_url: url="{{ jdk_tarball_url }}.tar.gz" dest="/usr/{{ jdk_tarball_file }}.tar.gz" mode="u=rwx,g=r,o=r" headers="Cookie:oraclelicense=accept-securebackup-cookie"
+  get_url: url="{{ jdk_tarball_url }}.tar.gz" dest="/usr/jdk-{{ jdk_version }}.tar.gz" mode="u=rwx,g=r,o=r" headers="Cookie:oraclelicense=accept-securebackup-cookie"
 
-- name: create dir
-  file: path="/usr/{{ jdk_tarball_file }}" mode="u=rwx,g=rx,o=rx" state=directory
 
 - name: untar the jdk
-  unarchive: src="/usr/{{ jdk_tarball_file }}.tar.gz" dest="/usr/" mode="u=rwx,g=rx,o=rx" copy=no
+  unarchive: src="/usr/jdk-{{ jdk_version }}.tar.gz" dest="/usr/" mode="u=rwx,g=rx,o=rx" copy=no
 
 - name: link jdk
-  file: src="/usr/jdk_version" dest=/usr/j2se state=link
+  file: src="/usr/jdk-{{ jdk_version }}" dest=/usr/j2se state=link
