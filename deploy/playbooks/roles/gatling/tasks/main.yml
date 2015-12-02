@@ -35,10 +35,10 @@
   when: "'gatling_master' in group_names"
 
 - name: put ssh key - private
-  copy: src={{ gatling_sshkey_private }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv" mode="u=rw,g=,o="
+  copy: src={{ gatling_sshkey_private }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv" mode="u=rw,g=,o=" owner="{{ gatling_run_user }}"
 
 - name: put ssh key - public
-  copy: src={{ gatling_sshkey_public }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.pub" mode="u=rw,g=,o="
+  copy: src={{ gatling_sshkey_public }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.pub" mode="u=rw,g=,o=" owner="{{ gatling_run_user }}"
 
 - name: add authorized_keys
   authorized_key: user={{ gatling_run_user }}  key="{{ lookup('file', '~{{ gatling_run_user }}/.ssh/gatling_sshkey.pub') }}"
