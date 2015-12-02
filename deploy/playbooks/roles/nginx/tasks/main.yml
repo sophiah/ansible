@@ -4,3 +4,12 @@
 - name: install nginx from yum
   yum: name=nginx state=latest
   notify: restart nginx
+
+- name: create incldue folder
+  file: path=/etc/nginx/conf.d/default state=directory mode="u=rwx,g=rx,o=rx"
+
+- name: put all other files
+  template: src={{ item.src }} dest={{ item.dest }} mode="u=rw,g=r,o=r"
+  with_items:
+    - { src: empty.conf, dest: "/etc/nginx/conf.d/default/empty.conf" }
+    - { src: default.conf, dest: "/etc/nginx/conf.d/default.conf" }

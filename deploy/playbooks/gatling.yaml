@@ -9,7 +9,7 @@
     - nginx
   vars:
     java_version: 7u80_x64
-    http_port: 8080
+    nginx_http_port: 8080
 
 - hosts: gatling_slave
   sudo: True

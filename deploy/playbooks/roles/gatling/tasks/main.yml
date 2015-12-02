@@ -17,3 +17,6 @@
   template: src=gatling_cluster_slave.sh dest=/usr/local/gatling/bin/gatling_cluster_slave.sh mode="u=rwx,g=rx,o=rx"
   when: "'gatling_slave' in group_names"
 
+- name: put nginx config
+  templates: src=gatling.conf dest=/etc/nginx/conf.d/default/gatling mode="u=rw,g=r,o=r"
+  when: "'gatling_master' in group_names"
