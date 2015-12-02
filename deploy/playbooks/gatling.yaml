@@ -8,7 +8,6 @@
     - gatling
   vars:
     java_version: 7u80_x64
-    nginx_http_port: 8080
 
 - hosts: gatling_slave
   sudo: True

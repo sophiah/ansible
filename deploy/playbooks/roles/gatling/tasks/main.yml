@@ -1,5 +1,18 @@
 ---
 
+- name: precondition - gatling cluster ssh key
+  fail: msg="ERROR - required variable 'gatling_sshkey_public' missing."
+  when: gatling_sshkey_public is not defined
+
+- name: precondition - gatling cluster ssh key
+  fail: msg="ERROR - required variable 'gatling_sshkey_private' missing."
+  when: gatling_sshkey_private is not defined
+
+- name: precondition - gatling run user
+  fail: msg="ERROR - required variable 'gatling_run_user' missing."
+  when: gatling_run_user is not defined
+
+
 - name : get gatling files
   get_url: url="{{ gatling_download_url }}" dest="{{ gatling_dest }}.zip"
 
@@ -20,3 +33,18 @@
 - name: put nginx config
   template: src=gatling.conf dest=/etc/nginx/conf.d/default/gatling.conf mode="u=rw,g=r,o=r"
   when: "'gatling_master' in group_names"
+
+- name: put ssh key - private
+  copy: src={{ gatling_sshkey_private }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv" mode="u=r,g=,o="
+
+- name: put ssh key - public
+  copy: src={{ gatling_sshkey_public }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.pub" mode="u=r,g=,o="
+
+- name: check if authorized_keys exists already
+  command: bash -c "cat ~{{ gatling_run_user }}/.ssh/authorized_keys | grep `cat ~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv` | wc -l"
+  register: check_key
+  ignore_errors: True
+
+- name: concat authorized_keys
+  command: bash -c "cat ~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv >> ~{{ gatling_run_user }}/.ssh/authorized_keys"
+  when: check_key.rc == 0
