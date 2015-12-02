@@ -49,3 +49,9 @@
     - /usr/local/gatling/reports
     - /usr/local/gatling/results
     - /usr/local/gatling/user-files
+
+- name: change gatling files owner and permission
+  file: path={{ item }} mode="u=rwx,g=rx,o=rx"
+  with_items:
+    - /usr/local/gatling/bin/gatling.sh
+
