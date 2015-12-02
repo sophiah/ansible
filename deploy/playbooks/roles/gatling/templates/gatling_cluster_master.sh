@@ -40,18 +40,20 @@ CURRTIME=`date "+%Y%m%d-%H%M%S"`
 REPORT_SUBDIR=$SIMULATION_NAME-$CURRTIME
 MY_HOST=`hostname`
 
+ssh_option="-i ~/.ssh/gatling_sshkey.priv -oStrictHostKeyChecking=no"
+
 mkdir -p $GATHER_REPORTS_DIR/$REPORT_SUBDIR
 
 for HOST in "${HOSTS[@]}"
 do
   echo "Copying simulations to host: $HOST"
-  scp -r $GATLING_HOME/user-files/* $USER_NAME@$HOST:$GATLING_HOME/user-files
+  scp ${ssh_option} -r $GATLING_HOME/user-files/* $USER_NAME@$HOST:$GATLING_HOME/user-files
 done
 
 for HOST in "${HOSTS[@]}"
 do
   echo "Running simulation on host: $HOST"
-  ssh -i ~/.ssh/gatling_sshkey.priv -oStrictHostKeyChecking=no -n -f $USER_NAME@$HOST "nohup $GATLING_HOME/bin/gatling_cluster_slave.sh $REPORT_SUBDIR $PACKAGE_NAME $CLASS_NAME $MY_HOST &"
+  ssh ${ssh_option} -n -f $USER_NAME@$HOST "nohup $GATLING_HOME/bin/gatling_cluster_slave.sh $REPORT_SUBDIR $PACKAGE_NAME $CLASS_NAME $MY_HOST &"
 done
 
 echo "Running simulation on localhost"
