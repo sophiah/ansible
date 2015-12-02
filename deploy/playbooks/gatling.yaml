@@ -8,7 +8,7 @@
     - gatling
   vars:
     java_version: 7u80_x64
-    is_gatling_master: True
+    is_gatling_master: true
 
 - hosts: gatling_slave
   sudo: True
@@ -19,4 +19,4 @@
     - gatling
   vars:
     java_version: 7u80_x64
-    is_gatling_slave: True
+    is_gatling_slave: true
