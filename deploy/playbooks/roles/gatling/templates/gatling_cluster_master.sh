@@ -51,7 +51,7 @@ done
 for HOST in "${HOSTS[@]}"
 do
   echo "Running simulation on host: $HOST"
-  ssh -n -f $USER_NAME@$HOST "nohup $GATLING_HOME/bin/gatling_cluster_slave.sh $REPORT_SUBDIR $PACKAGE_NAME $CLASS_NAME $MY_HOST &"
+  ssh -i ~/.ssh/gatling_sshkey.priv -oStrictHostKeyChecking=no -n -f $USER_NAME@$HOST "nohup $GATLING_HOME/bin/gatling_cluster_slave.sh $REPORT_SUBDIR $PACKAGE_NAME $CLASS_NAME $MY_HOST &"
 done
 
 echo "Running simulation on localhost"
