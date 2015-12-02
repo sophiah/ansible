@@ -6,7 +6,6 @@
     - gatling_master
   roles:
     - gatling
-    - nginx
   vars:
     java_version: 7u80_x64
     nginx_http_port: 8080

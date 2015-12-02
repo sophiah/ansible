@@ -1,3 +1,5 @@
 ---
 dependencies:
-  - { role: jdk }
+  - role: jdk
+  - role: nginx
+    when: "'gatling_master' in group_names"
