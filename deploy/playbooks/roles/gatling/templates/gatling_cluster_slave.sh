@@ -18,7 +18,10 @@ PACKAGE_NAME=$2
 CLASS_NAME=$3
 SIMULATION_NAME="${PACKAGE_NAME}.${CLASS_NAME}"
 ORG_HOST=$4
+CURRENT_HOST=`hostname | tr '[:upper:]' '[:lower:]' | awk -F. '{ print $1 }'`
 
 $GATLING_RUNNER -nr -on $GATLING_REPORT_DIR/$REPORT_SUBDIR -bdf $GATLING_HOME/user-files/bodies/$PACKAGE_NAME -s $SIMULATION_NAME  > /tmp/gatling.run.log 2>&1
 mv $GATLING_REPORT_DIR/$REPORT_SUBDIR* $GATLING_REPORT_DIR/$REPORT_SUBDIR
-scp -i ~/.ssh/gatling_sshkey.priv -oStrictHostKeyChecking=no $GATLING_REPORT_DIR/$REPORT_SUBDIR/simulation.log $USER_NAME@$ORG_HOST:$GATHER_REPORTS_DIR/$REPORT_SUBDIR/simulation-`hostname`.log
+scp -i ~/.ssh/gatling_sshkey.priv -oStrictHostKeyChecking=no \
+	$GATLING_REPORT_DIR/$REPORT_SUBDIR/simulation.log \
+	$USER_NAME@$ORG_HOST:$GATHER_REPORTS_DIR/$REPORT_SUBDIR/simulation-$CURRENT_HOST.log

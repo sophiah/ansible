@@ -68,10 +68,11 @@ cp $GATLING_REPORT_DIR/$REPORT_SUBDIR/simulation.log $GATHER_REPORTS_DIR/$REPORT
 
 for HOST in "${HOSTS[@]}"
 do
-  echo -n "Checking result file from host: $HOST"
+  CURRENT_HOST=`echo $HOST | tr '[:upper:]' '[:lower:]' | awk -F. '{ print $1 }'`
+  echo -n "Checking result file from host: $CURRENT_HOST"
   while [ 1 ]
   do
-    if [ -f "${GATHER_REPORTS_DIR}/$REPORT_SUBDIR/simulation-$HOST.log" ]; then
+    if [ -f "${GATHER_REPORTS_DIR}/$REPORT_SUBDIR/simulation-$CURRENT_HOST.log" ]; then
         echo " ..... got"
         break
     fi
