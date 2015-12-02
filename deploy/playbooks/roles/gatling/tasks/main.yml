@@ -49,6 +49,7 @@
     - /usr/local/gatling/reports
     - /usr/local/gatling/results
     - /usr/local/gatling/user-files
+    - /usr/local/gatling/target
 
 - name: change gatling files owner and permission
   file: path={{ item }} mode="u=rwx,g=rx,o=rx"
