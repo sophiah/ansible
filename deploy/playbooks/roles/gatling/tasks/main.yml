@@ -41,10 +41,10 @@
   copy: src={{ gatling_sshkey_public }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.pub" mode="u=r,g=,o="
 
 - name: check if authorized_keys exists already
-  command: bash -c "cat ~{{ gatling_run_user }}/.ssh/authorized_keys | grep `cat ~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv` | wc -l"
+  command: bash -c "cat ~{{ gatling_run_user }}/.ssh/authorized_keys | grep `cat ~{{ gatling_run_user }}/.ssh/gatling_sshkey.pub` | wc -l"
   register: check_key
   ignore_errors: True
 
 - name: concat authorized_keys
-  command: bash -c "cat ~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv >> ~{{ gatling_run_user }}/.ssh/authorized_keys"
+  command: bash -c "cat ~{{ gatling_run_user }}/.ssh/gatling_sshkey.pub >> ~{{ gatling_run_user }}/.ssh/authorized_keys"
   when: check_key.rc == 0
