@@ -18,5 +18,5 @@
   when: "'gatling_slave' in group_names"
 
 - name: put nginx config
-  templates: src=gatling.conf dest=/etc/nginx/conf.d/default/gatling mode="u=rw,g=r,o=r"
+  template: src=gatling.conf dest=/etc/nginx/conf.d/default/gatling.conf mode="u=rw,g=r,o=r"
   when: "'gatling_master' in group_names"
