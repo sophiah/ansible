@@ -8,7 +8,6 @@
     - gatling
     - nginx
   vars:
-    is_gatling_master: True
     java_version: 7u80_x64
     http_port: 8080
 
@@ -20,5 +19,4 @@
   roles:
     - gatling
   vars:
-    is_gatling_master: False
-
+    java_version: 7u80_x64

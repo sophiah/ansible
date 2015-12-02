@@ -9,11 +9,11 @@
 - name: link
   file: src="{{ gatling_dest }}" dest=/usr/local/gatling state=link
 
-- name: put master fun file
+- name: put master file
   template: src=gatling_cluster_master.sh dest=/usr/local/gatling/bin/gatling_cluster_master.sh mode="u=rwx,g=rx,o=rx"
   when: "'gatling_master' in group_names"
 
-- name: put slave fun file
+- name: put slave file
   template: src=gatling_cluster_slave.sh dest=/usr/local/gatling/bin/gatling_cluster_slave.sh mode="u=rwx,g=rx,o=rx"
   when: "'gatling_slave' in group_names"
 
