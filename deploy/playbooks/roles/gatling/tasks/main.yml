@@ -42,3 +42,10 @@
 
 - name: add authorized_keys
   authorized_key: user={{ gatling_run_user }}  key="{{ lookup('file', '{{ gatling_sshkey_public }}') }}"
+
+- name: change gatling files owner and permission
+  file: path={{ item }} mode="u=rwx,g=rx,o=rx" owner="{{ gatling_run_user }}" recurse="yes"
+  with_items:
+    - /usr/local/gatling/reports
+    - /usr/local/gatling/results
+    - /usr/local/gatling/user-files

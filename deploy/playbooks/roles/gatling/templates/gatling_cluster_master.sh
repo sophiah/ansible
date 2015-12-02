@@ -40,7 +40,8 @@ CURRTIME=`date "+%Y%m%d-%H%M%S"`
 REPORT_SUBDIR=$SIMULATION_NAME-$CURRTIME
 MY_HOST=`hostname`
 
-ssh_option="-i ~/.ssh/gatling_sshkey.priv -oStrictHostKeyChecking=no"
+sshkey_path=`readlink -f ~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv`
+ssh_option="-i $sshkey_path -oStrictHostKeyChecking=no"
 
 mkdir -p $GATHER_REPORTS_DIR/$REPORT_SUBDIR
 
