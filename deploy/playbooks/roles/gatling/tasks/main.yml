@@ -32,15 +32,15 @@
 
 - name: put master file
   template: src=gatling_cluster_master.sh dest=/usr/local/gatling/bin/gatling_cluster_master.sh mode="u=rwx,g=rx,o=rx"
-  when: is_gatling_master == True
+  when: is_gatling_master 
 
 - name: put slave file
   template: src=gatling_cluster_slave.sh dest=/usr/local/gatling/bin/gatling_cluster_slave.sh mode="u=rwx,g=rx,o=rx"
-  when: is_gatling_slave == True
+  when: is_gatling_slave
 
 - name: put nginx config
   template: src=gatling.conf dest=/etc/nginx/conf.d/default/gatling.conf mode="u=rw,g=r,o=r"
-  when: is_gatling_master == True
+  when: is_gatling_master
 
 - name: put ssh key - private
   copy: src={{ gatling_sshkey_private }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv" mode="u=rw,g=,o=" owner="{{ gatling_run_user }}"

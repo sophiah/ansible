@@ -2,4 +2,4 @@
 dependencies:
   - role: jdk
   - role: nginx
-    when: is_gatling_master == True
+    when: is_gatling_master
