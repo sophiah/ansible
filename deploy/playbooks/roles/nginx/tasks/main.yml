@@ -13,6 +13,8 @@
   with_items:
     - { src: empty.conf, dest: "/etc/nginx/conf.d/default/empty.conf" }
     - { src: default.conf, dest: "/etc/nginx/conf.d/default.conf" }
+    - { src: nginx.conf, dest: "/etc/nginx/nginx.conf" }
+  notify: restart nginx
 
 - name: create log
   file: path=/var/log/nginx/log state=directory mode="u=rwx,g=rx,o=rx" owner={{ nginx_runuser | default('nginx') }} recurse=yes
