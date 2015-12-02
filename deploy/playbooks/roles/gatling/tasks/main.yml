@@ -12,6 +12,14 @@
   fail: msg="ERROR - required variable 'gatling_run_user' missing."
   when: gatling_run_user is not defined
 
+- name: precondition - galting_slave_groups
+  fail: msg="ERROR - required variable 'galting_slave_groups' missing."
+  when: galting_slave_groups is not defined
+
+- name: set fact
+  shell: "echo {{ groups[ item ] | join(' ') }}"
+  register: slave_list_full
+  with_items: "{{ galting_slave_groups }}"
 
 - name : get gatling files
   get_url: url="{{ gatling_download_url }}" dest="{{ gatling_dest }}.zip"
@@ -24,15 +32,15 @@
 
 - name: put master file
   template: src=gatling_cluster_master.sh dest=/usr/local/gatling/bin/gatling_cluster_master.sh mode="u=rwx,g=rx,o=rx"
-  when: "'gatling_master' in group_names"
+  when: is_gatling_master == True
 
 - name: put slave file
   template: src=gatling_cluster_slave.sh dest=/usr/local/gatling/bin/gatling_cluster_slave.sh mode="u=rwx,g=rx,o=rx"
-  when: "'gatling_slave' in group_names"
+  when: is_gatling_slave == True
 
 - name: put nginx config
   template: src=gatling.conf dest=/etc/nginx/conf.d/default/gatling.conf mode="u=rw,g=r,o=r"
-  when: "'gatling_master' in group_names"
+  when: is_gatling_master == True
 
 - name: put ssh key - private
   copy: src={{ gatling_sshkey_private }} dest="~{{ gatling_run_user }}/.ssh/gatling_sshkey.priv" mode="u=rw,g=,o=" owner="{{ gatling_run_user }}"

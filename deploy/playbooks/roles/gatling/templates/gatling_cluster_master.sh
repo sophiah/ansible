@@ -18,7 +18,7 @@ fi
 USER_NAME={{ gatling_run_user }}
 
 #Remote hosts list
-HOSTS=( {{ groups["gatling_slave"] | join(" ") }} )
+HOSTS=( {{ slave_list_full.stdout }} )
 
 #Assuming all Gatling installation in same path (with write permissions)
 GATLING_HOME=/usr/local/gatling

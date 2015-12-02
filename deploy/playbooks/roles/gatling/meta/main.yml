@@ -2,4 +2,4 @@
 dependencies:
   - role: jdk
   - role: nginx
-    when: "'gatling_master' in group_names"
+    when: is_gatling_master == True
