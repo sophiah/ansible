@@ -1,5 +1,5 @@
-cluster_name: '{{ cassandra.cluster_name }}'
-num_tokens: {{ cassandra.num_tokens }}
+cluster_name: '{{ cassandra_cluster_name }}'
+num_tokens: {{ cassandra_num_tokens }}
 
 # initial_token allows you to specify tokens manually.  While you can use # it with
 # vnodes (num_tokens > 1, above) -- in which case you should provide a
@@ -40,7 +40,7 @@ batchlog_replay_throttle_in_kb: 1024
 #   users. It keeps usernames and hashed passwords in system_auth.credentials table.
 #   Please increase system_auth keyspace replication factor if you use this authenticator.
 #   If using PasswordAuthenticator, CassandraRoleManager must also be used (see below)
-authenticator: {{ cassandra.authenticator }}
+authenticator: {{ cassandra_authenticator }}
 
 # Authorization backend, implementing IAuthorizer; used to limit access/provide permissions
 # Out of the box, Cassandra provides org.apache.cassandra.auth.{AllowAllAuthorizer,
@@ -49,7 +49,7 @@ authenticator: {{ cassandra.authenticator }}
 # - AllowAllAuthorizer allows any action to any user - set it to disable authorization.
 # - CassandraAuthorizer stores permissions in system_auth.permissions table. Please
 #   increase system_auth keyspace replication factor if you use this authorizer.
-authorizer: {{ cassandra.authorizer }}
+authorizer: {{ cassandra_authorizer }}
 
 # Part of the Authentication & Authorization backend, implementing IRoleManager; used
 # to maintain grants and memberships between roles.
@@ -60,7 +60,7 @@ authorizer: {{ cassandra.authorizer }}
 #
 # - CassandraRoleManager stores role data in the system_auth keyspace. Please
 #   increase system_auth keyspace replication factor if you use this role manager.
-role_manager: {{ cassandra.role_manager }}
+role_manager: {{ cassandra_role_manager }}
 
 # Validity period for roles cache (fetching permissions can be an
 # expensive operation depending on the authorizer). Granted roles are cached for
@@ -102,7 +102,7 @@ permissions_validity_in_ms: 2000
 # compatibility include RandomPartitioner, ByteOrderedPartitioner, and
 # OrderPreservingPartitioner.
 #
-partitioner: {{ cassandra.partitioner }}
+partitioner: {{ cassandra_partitioner }}
 
 # Directories where Cassandra should store data on disk.  Cassandra
 # will spread data evenly across them, subject to the granularity of
@@ -127,7 +127,7 @@ partitioner: {{ cassandra.partitioner }}
 #              remaining available sstables.  This means you WILL see obsolete
 #              data at CL.ONE!
 # ignore: ignore fatal errors and let requests fail, as in pre-1.2 Cassandra
-disk_failure_policy: {{ cassandra.disk_failure_policy }}
+disk_failure_policy: {{ cassandra_disk_failure_policy }}
 
 # policy for commit disk failures:
 # die: shut down gossip and Thrift and kill the JVM, so the node can be replaced.
@@ -136,7 +136,7 @@ disk_failure_policy: {{ cassandra.disk_failure_policy }}
 # stop_commit: shutdown the commit log, letting writes collect but
 #              continuing to service reads, as in pre-2.0.5 Cassandra
 # ignore: ignore fatal errors and let the batches fail
-commit_failure_policy: {{ cassandra.commit_failure_policy }}
+commit_failure_policy: {{ cassandra_commit_failure_policy }}
 
 # Maximum size of the key cache in memory.
 #
@@ -402,7 +402,7 @@ ssl_storage_port: 7001
 # address will be used. If true the first ipv6 address will be used. Defaults to false preferring
 # ipv4. If there is only one address it will be selected regardless of ipv4/ipv6.
 # listen_address: localhost
-listen_interface: {{ cassandra.listen_interface }}
+listen_interface: {{ cassandra_listen_interface }}
 # listen_interface_prefer_ipv6: false
 
 # Address to broadcast to other Cassandra nodes
@@ -416,10 +416,10 @@ listen_interface: {{ cassandra.listen_interface }}
 # Whether to start the native transport server.
 # Please note that the address on which the native transport is bound is the
 # same as the rpc_address. The port however is different and specified below.
-start_native_transport: {{ cassandra.start_native_transport }}
+start_native_transport: {{ cassandra_start_native_transport }}
 # port for the CQL native transport to listen for clients on
 # For security reasons, you should not expose this port to the internet.  Firewall it if needed.
-native_transport_port: {{ cassandra.native_transport_port }}
+native_transport_port: {{ cassandra_native_transport_port }}
 # The maximum threads for handling requests when the native transport is used.
 # This is similar to rpc_max_threads though the default differs slightly (and
 # there is no native_transport_min_threads, idle threads will always be stopped
@@ -439,7 +439,7 @@ native_transport_port: {{ cassandra.native_transport_port }}
 # native_transport_max_concurrent_connections_per_ip: -1
 
 # Whether to start the thrift rpc server.
-start_rpc: {{ cassandra.start_rpc }}
+start_rpc: {{ cassandra_start_rpc }}
 
 # The address or interface to bind the Thrift RPC service and native transport
 # server to.
@@ -460,11 +460,11 @@ start_rpc: {{ cassandra.start_rpc }}
 # address will be used. If true the first ipv6 address will be used. Defaults to false preferring
 # ipv4. If there is only one address it will be selected regardless of ipv4/ipv6.
 #rpc_address: localhost
-rpc_interface: {{ cassandra.rpc_interface }}
+rpc_interface: {{ cassandra_rpc_interface }}
 # rpc_interface_prefer_ipv6: false
 
 # port for Thrift to listen for clients on
-rpc_port: {{ cassandra.rpc_port }}
+rpc_port: {{ cassandra_rpc_port }}
 
 # RPC address to broadcast to drivers and other Cassandra nodes. This cannot
 # be set to 0.0.0.0. If left blank, this will be set to the value of

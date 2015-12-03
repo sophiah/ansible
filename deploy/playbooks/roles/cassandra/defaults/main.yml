@@ -4,18 +4,18 @@ cassandra_data: /usr/local/cassandra/data
 cassandra_user: cassandra
 cassandra_group: cassandra
 
-cassandra:
-    cluster_name: Test Cluster
-    num_tokens: 256
-    authenticator: AllowAllAuthenticator
-    authorizer: AllowAllAuthorizer
-    role_manager: CassandraRoleManager
-    partitioner: org.apache.cassandra.dht.Murmur3Partitioner
-    disk_failure_policy: stop
-    commit_failure_policy: stop
-    listen_interface: eth0
-    start_native_transport: true
-    native_transport_port: 9042
-    start_rpc: false
-    rpc_interface: eth0
-    rpc_port: 9160
+
+cassandra_cluster_name: Test Cluster
+cassandra_num_tokens: 256
+cassandra_authenticator: AllowAllAuthenticator
+cassandra_authorizer: AllowAllAuthorizer
+cassandra_role_manager: CassandraRoleManager
+cassandra_partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+cassandra_disk_failure_policy: stop
+cassandra_commit_failure_policy: stop
+cassandra_listen_interface: eth0
+cassandra_start_native_transport: true
+cassandra_native_transport_port: 9042
+cassandra_start_rpc: false
+cassandra_rpc_interface: eth0
+cassandra_rpc_port: 9160
