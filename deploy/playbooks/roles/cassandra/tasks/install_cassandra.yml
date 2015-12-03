@@ -10,7 +10,7 @@
   command: creates={{ cassandra_home }}-{{ cassandra_version }}
            bash -c "mkdir -m go=rx {{ cassandra_home }}-{{ cassandra_version }}; /bin/tar zxvf {{ cassandra_home }}-{{ cassandra_version }}.tar.gz -C {{ cassandra_home }}-{{ cassandra_version }} --strip=1"
 
-- name: link tomcat
+- name: link cassandra
   file: src="{{ cassandra_home }}-{{ cassandra_version }}" dest={{ cassandra_home }} state=link
   notify: restart cassandra
 
