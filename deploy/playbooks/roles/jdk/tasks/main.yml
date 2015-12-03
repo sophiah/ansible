@@ -17,4 +17,4 @@
   file: src="/usr/{{ jdk_tarball_file }}" dest=/usr/j2se state=link
 
 - name: set JAVA_HOME
-  command: bash -c "if [ `cat /etc/bashrc | grep JAVA_HOME | wc -l` == 0 ] ; then echo 'export JAVA_HOME=/usr/j2se' >> /etc/bashrc ;  fi"
+  command: bash -c "if [ `cat /etc/bashrc | grep JAVA_HOME | wc -l` == 0 ] ; then echo 'export JAVA_HOME=/usr/j2se; export PATH=$JAVA_HOME/bin:$PATH; ' >> /etc/bashrc ;  fi"
