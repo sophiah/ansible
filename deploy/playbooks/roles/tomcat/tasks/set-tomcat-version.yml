@@ -17,7 +17,7 @@
 
 - name: set tomcat for 7.0.65
   set_fact:
-    tomcat_tarball_url:  http://ftp.tc.edu.tw/pub/Apache/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.zip
+    tomcat_tarball_url:  http://ftp.tc.edu.tw/pub/Apache/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.tar.gz
   when: tomcat_version == "7.0.65"
 
 

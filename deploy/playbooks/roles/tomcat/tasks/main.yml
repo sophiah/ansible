@@ -14,7 +14,7 @@
   get_url: url="{{ tomcat_tarball_url }}" dest="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" mode="u=rwx,g=r,o=r"
 
 - name: untar the tomcat
-  command: chdir=/usr 
+  command: chdir=/usr/local
            creates=/usr/local/tomcat-{{ tomcat_version }}
            bash -c "mkdir -m go=rx /usr/local/tomcat-{{ tomcat_version }}; /bin/tar zxvf /usr/local/tomcat-{{ tomcat_version }}.tar.gz -C /usr/local/tomcat-{{ tomcat_version }} --strip=1"
 
