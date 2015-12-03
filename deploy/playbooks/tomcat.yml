@@ -9,3 +9,5 @@
   vars:
     java_version: 7u80_x64
     tomcat_version: 7.0.65
+
+# tomcat_server_xml set if you have your one

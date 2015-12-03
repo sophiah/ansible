@@ -3,6 +3,8 @@ tomcat_runuser = tomcat
 tomcat_rungroup= tomcat
 tomcat_gui_manager=
 tomcat_gui_manager_pwd=
+tomcat_catalina_opts_ms=512M
+tomcat_catalina_opts_mx=1024M
 java_version=
 tomcat_version=
 

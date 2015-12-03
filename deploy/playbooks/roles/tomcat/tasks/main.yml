@@ -8,15 +8,6 @@
   fail: msg="ERROR - required variable 'tomcat_version' missing."
   when: tomcat_version is not defined
 
-- include: set-tomcat-version.yml
+- include: install_tomcat.yml
+- include: install_tomcat_config.yml
 
-- name: get tomcat tarball (as tar.gz file)
-  get_url: url="{{ tomcat_tarball_url }}" dest="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" mode="u=rwx,g=r,o=r"
-
-- name: untar the tomcat
-  command: chdir=/usr/local
-           creates=/usr/local/tomcat-{{ tomcat_version }}
-           bash -c "mkdir -m go=rx /usr/local/tomcat-{{ tomcat_version }}; /bin/tar zxvf /usr/local/tomcat-{{ tomcat_version }}.tar.gz -C /usr/local/tomcat-{{ tomcat_version }} --strip=1"
-
-- name: link tomcat
-  file: src="/usr/local/tomcat-{{ tomcat_version }}" dest=/usr/local/tomcat state=link

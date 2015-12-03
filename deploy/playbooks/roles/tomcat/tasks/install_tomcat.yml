@@ -1,0 +1,27 @@
+---
+## install_tomcat.yml
+- include: set-tomcat-version.yml
+
+- name: get tomcat tarball (as tar.gz file)
+  get_url: url="{{ tomcat_tarball_url }}" dest="{{ tomcat_home }}-{{ tomcat_version }}.tar.gz" mode="u=rwx,g=r,o=r"
+
+- name: untar the tomcat
+  command: creates={{ tomcat_home }}-{{ tomcat_version }}
+           bash -c "mkdir -m go=rx {{ tomcat_home }}-{{ tomcat_version }}; /bin/tar zxvf {{ tomcat_home }}-{{ tomcat_version }}.tar.gz -C {{ tomcat_home }}-{{ tomcat_version }} --strip=1"
+
+- name: change tomcat directory permission
+  file: path="{{ tomcat_home }}" state=directory mode="u=rwx,g=rx,o=rx" recurse=yes
+
+- name: change tomcat directory permission
+  file: path="{{ item }}" state=directory mode="u=rwx,g=rx,o=rx" recurse=yes owner="{{ tomcat_runuser }}" group="{{ tomcat_rungroup }}"
+  with_items:
+    - {{ tomcat_logs }}
+    - {{ tomcat_home }}/temp
+
+- name: link tomcat
+  file: src="{{ tomcat_home }}-{{ tomcat_version }}" dest={{ tomcat_home }} state=link
+  notify: restart tomcat
+
+- name: set systemd
+  template: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode="u=rwx,g=rx,o=rx"
+
