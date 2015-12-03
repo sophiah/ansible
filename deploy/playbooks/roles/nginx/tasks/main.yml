@@ -17,7 +17,7 @@
   notify: restart nginx
 
 - name: create log
-  file: path=/var/log/nginx/log state=directory 
+  file: path=/var/log/nginx state=directory
         mode="u=rwx,g=rx,o=rx"
         owner={{ nginx_runuser | default('nginx') }}
         group={{ nginx_rungroup | default('nginx') }}
