@@ -13,7 +13,9 @@
   file: path="{{ tomcat_home }}" state=directory mode="u=rwx,g=rx,o=rx" recurse=yes
 
 - name: change tomcat directory permission
-  file: path="{{ item }}" state=directory mode="u=rwx,g=rx,o=rx" recurse=yes owner="{{ tomcat_runuser }}" group="{{ tomcat_rungroup }}"
+  file: path="{{ item }}"
+        state=directory mode="u=rwx,g=rx,o=rx" recurse=yes
+        owner="{{ tomcat_runuser }}" group="{{ tomcat_rungroup }}"
   with_items:
     - "{{ tomcat_logs }}"
     - "{{ tomcat_home }}/temp"
