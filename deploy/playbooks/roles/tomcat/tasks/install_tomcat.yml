@@ -18,7 +18,9 @@
         owner="{{ tomcat_runuser }}" group="{{ tomcat_rungroup }}"
   with_items:
     - "{{ tomcat_logs }}"
+    - "{{ tomcat_home }}/webapps"
     - "{{ tomcat_home }}-{{ tomcat_version }}/temp"
+  notify: restart tomcat
 
 - name: link tomcat
   file: src="{{ tomcat_home }}-{{ tomcat_version }}" dest={{ tomcat_home }} state=link
