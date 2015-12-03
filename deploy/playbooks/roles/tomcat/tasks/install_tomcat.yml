@@ -28,4 +28,4 @@
 
 - name: set systemd
   template: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode="u=rwx,g=rx,o=rx"
-
+  notify: restart tomcat
