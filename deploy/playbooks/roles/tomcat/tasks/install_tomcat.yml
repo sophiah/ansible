@@ -15,8 +15,8 @@
 - name: change tomcat directory permission
   file: path="{{ item }}" state=directory mode="u=rwx,g=rx,o=rx" recurse=yes owner="{{ tomcat_runuser }}" group="{{ tomcat_rungroup }}"
   with_items:
-    - {{ tomcat_logs }}
-    - {{ tomcat_home }}/temp
+    - "{{ tomcat_logs }}"
+    - "{{ tomcat_home }}/temp"
 
 - name: link tomcat
   file: src="{{ tomcat_home }}-{{ tomcat_version }}" dest={{ tomcat_home }} state=link

@@ -1,7 +1,7 @@
 tomcat_runuser: tomcat
 tomcat_rungroup: tomcat
-tomcat_catalina_opts_ms:512M
-tomcat_catalina_opts_mx:1024M
+tomcat_catalina_opts_ms: 512M
+tomcat_catalina_opts_mx: 1024M
 tomcat_home: /usr/local/tomcat
 tomcat_logs: /usr/local/tomcat/logs
 tomcat_http_port: 8080
