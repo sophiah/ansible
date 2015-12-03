@@ -1,4 +1,11 @@
 [all:vars]
+gatling_run_user = 
+nginx_runuser = nginx
+nginx_rungroup= nginx
+gatling_sshkey_public = PATH_FOR_PUBLIC_KEY
+gatling_sshkey_private= PATH_FOR_PRIVATE_KEY
+galting_slave_groups=gatling_slave
+
 
 [gatling_master]
 

@@ -13,8 +13,10 @@
 - name: get tomcat tarball (as tar.gz file)
   get_url: url="{{ tomcat_tarball_url }}" dest="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" mode="u=rwx,g=r,o=r"
 
-- name: untar the jdk
-  unarchive: src="/usr/local/tomcat-{{ tomcat_version }}.tar.gz" dest="/usr/local/tomcat-{{ tomcat_version }}" mode="u=rwx,g=rx,o=rx" copy=no
+- name: untar the tomcat
+  command: chdir=/usr 
+  		   creates=/usr/local/tomcat-{{ tomcat_version }}
+  		   bash -c "mkdir -m go=rx /usr/local/tomcat-{{ tomcat_version }}; /bin/tar zxvf /usr/local/{{ tomcat_version }}.tar.gz -C /usr/local/{{ tomcat_version }} --strip=1"
 
-- name: link jdk
+- name: link tomcat
   file: src="/usr/local/tomcat-{{ tomcat_version }}" dest=/usr/local/tomcat state=link

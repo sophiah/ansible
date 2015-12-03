@@ -1,0 +1,13 @@
+[all:vars]
+gatling_run_user = 
+tomcat_runuser = tomcat
+tomcat_rungroup= tomcat
+tomcat_gui_manager=
+tomcat_gui_manager_pwd=
+java_version=
+tomcat_version=
+
+
+[tomcat]
+
+
