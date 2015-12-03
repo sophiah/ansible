@@ -13,3 +13,9 @@ cassandra:
     partitioner: org.apache.cassandra.dht.Murmur3Partitioner
     disk_failure_policy: stop
     commit_failure_policy: stop
+    listen_interface: eth0
+    start_native_transport: true
+    native_transport_port: 9042
+    start_rpc: false
+    rpc_interface: eth0
+    rpc_port: 9160
