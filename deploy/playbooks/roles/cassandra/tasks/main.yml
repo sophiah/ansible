@@ -1,0 +1,9 @@
+---
+## main.yml
+
+- name: cassandra_version check
+  fail: msg="ERROR - required variable 'cassandra_version' missing."
+  when: cassandra_version is not defined
+
+- include: install_cassandra.yml
+

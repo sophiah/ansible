@@ -1,0 +1,38 @@
+---
+## install_cassandra.yml
+
+- include: set_cassandra_version.yml
+
+- name: get cassandra tarball (as tar.gz file)
+  get_url: url="{{ cassandra_tarball_url }}" dest="{{ cassandra_home }}-{{ cassandra_version }}.tar.gz" mode="u=rwx,g=r,o=r"
+
+- name: untar the cassandra
+  command: creates={{ cassandra_home }}-{{ cassandra_version }}
+           bash -c "mkdir -m go=rx {{ cassandra_home }}-{{ cassandra_version }}; /bin/tar zxvf {{ cassandra_home }}-{{ cassandra_version }}.tar.gz -C {{ cassandra_home }}-{{ cassandra_version }} --strip=1"
+
+- name: link tomcat
+  file: src="{{ cassandra_home }}-{{ cassandra_version }}" dest={{ cassandra_home }} state=link
+  notify: restart cassandra
+
+- name: add cassandra user group
+  user: name="{{ cassandra_group }}" state=present
+
+- name: add cassandra user
+  user: name="{{ cassandra_user }}" group="{{ cassandra_group }}"  state=present
+
+- name: change cassandra_home directory permission
+  file: path="{{ cassandra_home }}-{{ cassandra_version }}" state=directory mode="u=rwx,g=rx,o=rx" recurse=yes
+
+- name: change cassandra directory permission
+  file: path="{{ item }}"
+        state=directory mode="u=rwx,g=rx,o=rx" recurse=yes
+        owner="{{ cassandra_user }}" group="{{ cassandra_group }}"
+  with_items:
+    - "{{ cassandra_logs }}"
+    - "{{ cassandra_data }}"
+  notify: restart cassandra
+
+
+- name: set systemd
+  template: src=cassandra.service dest=/etc/systemd/system/cassandra.service mode="u=rwx,g=rx,o=rx"
+  notify: restart cassandra

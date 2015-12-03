@@ -1,0 +1,5 @@
+cassandra_home: /usr/local/cassandra
+cassandra_logs: /usr/local/cassandra/logs
+cassandra_data: /usr/local/cassandra/data
+cassandra_user: cassandra
+cassandra_group: cassandra

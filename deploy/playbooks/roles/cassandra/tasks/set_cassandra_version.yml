@@ -1,0 +1,16 @@
+---
+## set_cassandra_version.yml
+
+- name: set cassandra for 3.0.0
+  set_fact:
+    cassandra_tarball_url:  http://apache.stu.edu.tw/cassandra/3.0.0/apache-cassandra-3.0.0-bin.tar.gz
+  when: cassandra_version == "3.0.0"
+
+
+- name: set cassandra for 2.2.3
+  set_fact:
+    cassandra_tarball_url:  http://apache.stu.edu.tw/cassandra/2.2.3/apache-cassandra-2.2.3-bin.tar.gz
+  when: cassandra_version == "2.2.3"
+
+
+

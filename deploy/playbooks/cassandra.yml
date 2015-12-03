@@ -1,0 +1,10 @@
+---
+- hosts: cassandra
+  sudo: True
+  tags: 
+    - cassandra
+  roles:
+    - cassandra
+  vars:
+    java_version: 7u80_x64
+    cassandra_version: 2.2.3
