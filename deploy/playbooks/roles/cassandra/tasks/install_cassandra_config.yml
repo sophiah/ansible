@@ -1,0 +1,16 @@
+---
+## install_cassandra_config.yml
+
+- name: template for cassandra.yaml
+  template: src=cassandra.yaml dest={{ cassandra_home }}/conf/cassandra.yaml mode="u=rwx,g=rx,o=rx"
+  when: cassandra_yaml is undefined
+
+- name: template for cassandra.yaml custom
+  template: src={{ cassandra_yaml }} dest={{ cassandra_home }}/conf/cassandra.yaml mode="u=rwx,g=rx,o=rx"
+  when: cassandra_yaml is defined
+
+- name: temp scripts files for cqlsh
+  file: path={{ cassandra_home }}/temp mode="u=rwx,g=rx,o=rx" state=directory
+
+- include: run_cassandra_cql_commands.yml
+  when: cassandra_cust_cql_scripts is defined

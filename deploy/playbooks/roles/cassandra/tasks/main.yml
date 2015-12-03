@@ -6,4 +6,4 @@
   when: cassandra_version is not defined
 
 - include: install_cassandra.yml
-
+- include: install_cassandra_config.yml

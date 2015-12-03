@@ -32,7 +32,6 @@
     - "{{ cassandra_data }}"
   notify: restart cassandra
 
-
 - name: set systemd
   template: src=cassandra.service dest=/etc/systemd/system/cassandra.service mode="u=rwx,g=rx,o=rx"
   notify: restart cassandra

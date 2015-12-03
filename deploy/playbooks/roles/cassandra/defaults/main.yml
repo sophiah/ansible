@@ -3,3 +3,13 @@ cassandra_logs: /usr/local/cassandra/logs
 cassandra_data: /usr/local/cassandra/data
 cassandra_user: cassandra
 cassandra_group: cassandra
+
+cassandra:
+    cluster_name: Test Cluster
+    num_tokens: 256
+    authenticator: AllowAllAuthenticator
+    authorizer: AllowAllAuthorizer
+    role_manager: CassandraRoleManager
+    partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+    disk_failure_policy: stop
+    commit_failure_policy: stop

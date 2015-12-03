@@ -1,0 +1,11 @@
+---
+## run_cassandra_cql_commands.yml
+
+- name: copy custom scripts first
+  copy: src="{{ item }}"  dest={{ cassandra_home }}/temp/{{ item | basename }}
+  with_items: "{{ cassandra_cust_cql_scripts }}"
+
+
+- name: run custom scripts
+  shell: {{ cassandra_home }}/bin/cqlsh -u {{ cassandra_cust_cql_user }} -p {{ cassandra_cust_cql_user }} localhost
+  with_items: "{{ cassandra_cust_cql_scripts }}"
