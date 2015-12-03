@@ -7,7 +7,7 @@ After=syslog.target network.target
 Type=forking
 
 Environment=JAVA_HOME=/usr/j2se
-Environment=CLASSPATH=.;{{ tomcat_home }}/lib/servlet-api.jar;{{ tomcat_home }}/lib/jsp-api.jar;
+Environment=CLASSPATH=.;{{ tomcat_home }}/bin/bootstrap.jar:{{ tomcat_home }}/bin/tomcat-juli.jar;{{ tomcat_home }}/lib/servlet-api.jar;{{ tomcat_home }}/lib/jsp-api.jar;
 Environment=CATALINA_PID={{ tomcat_home }}/temp/tomcat.pid
 Environment=CATALINA_HOME={{ tomcat_home }}
 Environment=CATALINA_BASE={{ tomcat_home }}
