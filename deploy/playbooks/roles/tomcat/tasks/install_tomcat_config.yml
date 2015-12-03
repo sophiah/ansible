@@ -4,16 +4,19 @@
 - name: install server.xml - default
   template: src=server.xml dest="{{ tomcat_home }}/conf/server.xml"
   when: tomcat_server_xml is not defined
+  notify: restart tomcat
 
 - name: install server.xml - custom
   template: src="{{ tomcat_server_xml }}" dest="{{ tomcat_home }}/conf/server.xml"
   when: tomcat_server_xml is defined
+  notify: restart tomcat
 
 - name: deploy tomcat-user - template
   template: src=tomcat-users.xml dest="{{ tomcat_home }}/conf/tomcat-users.xml" mode="u=rwx,g=rx,o=rx"
-  when: {{ tomcat_gui_manager }} is defined and {{ tomcat_gui_manager_pwd }} is defined
+  when: tomcat_gui_manager is defined and tomcat_gui_manager_pwd is defined
   notify: restart tomcat
-  
+
 - name: deploy tomcat_users_xml - custom
   template: src="{{ tomcat_users_xml }}" dest="{{ tomcat_home }}/conf/tomcat-users.xml" mode="u=rwx,g=rx,o=rx"
   when: tomcat_users_xml is defined
+  notify: restart tomcat
