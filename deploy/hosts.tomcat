@@ -1,5 +1,4 @@
 [all:vars]
-gatling_run_user = 
 tomcat_runuser = tomcat
 tomcat_rungroup= tomcat
 tomcat_gui_manager=

@@ -1,0 +1,11 @@
+---
+# tomcat.yaml
+
+- hosts: tomcat
+  sudo: True
+  tags: tomcat
+  roles:
+    - tomcat
+  vars:
+    java_version: 7u80_x64
+    tomcat_version: 7.0.65
