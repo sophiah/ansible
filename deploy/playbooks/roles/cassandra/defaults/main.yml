@@ -3,6 +3,8 @@ cassandra_logs: /usr/local/cassandra/logs
 cassandra_data: /usr/local/cassandra/data
 cassandra_user: cassandra
 cassandra_group: cassandra
+cassandra_cust_cql_user: cassandra
+cassandra_cust_cql_pwd: cassandra
 
 
 cassandra_cluster_name: Test Cluster
