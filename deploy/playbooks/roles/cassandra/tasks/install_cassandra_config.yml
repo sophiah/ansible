@@ -15,4 +15,4 @@
   file: path={{ cassandra_home }}/temp mode="u=rwx,g=rx,o=rx" state=directory
 
 - include: run_cassandra_cql_commands.yml
-  when: cassandra_cust_cql_scripts is defined
+  when: cassandra_cust_cql_scripts_dir is defined
