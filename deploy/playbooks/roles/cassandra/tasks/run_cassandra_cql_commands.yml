@@ -7,5 +7,5 @@
 
 
 - name: run custom scripts
-  shell: bash -c "{{ cassandra_home }}/bin/cqlsh -u {{ cassandra_cust_cql_user }} -p {{ cassandra_cust_cql_pwd }} -f {{ cassandra_home }}/temp/{{ item | basename }} localhost {{ cassandra_native_transport_port }} "
+  shell: bash -c "{{ cassandra_home }}/bin/cqlsh -u {{ cassandra_cust_cql_user }} -p {{ cassandra_cust_cql_pwd }} -f {{ cassandra_home }}/temp/{{ item | basename }} {{ ansible_hostname }} {{ cassandra_native_transport_port }} "
   with_fileglob: "{{ cassandra_cust_cql_scripts_dir }}/*"
