@@ -9,6 +9,10 @@
   command: creates={{ tomcat_home }}-{{ tomcat_version }}
            bash -c "mkdir -m go=rx {{ tomcat_home }}-{{ tomcat_version }}; /bin/tar zxvf {{ tomcat_home }}-{{ tomcat_version }}.tar.gz -C {{ tomcat_home }}-{{ tomcat_version }} --strip=1"
 
+- name: link tomcat
+  file: src="{{ tomcat_home }}-{{ tomcat_version }}" dest={{ tomcat_home }} state=link
+  notify: restart tomcat
+
 - name: change tomcat directory permission
   file: path="{{ tomcat_home }}-{{ tomcat_version }}" state=directory mode="u=rwx,g=rx,o=rx" recurse=yes
 
@@ -20,10 +24,6 @@
     - "{{ tomcat_logs }}"
     - "{{ tomcat_home }}/webapps"
     - "{{ tomcat_home }}-{{ tomcat_version }}/temp"
-  notify: restart tomcat
-
-- name: link tomcat
-  file: src="{{ tomcat_home }}-{{ tomcat_version }}" dest={{ tomcat_home }} state=link
   notify: restart tomcat
 
 - name: set systemd
