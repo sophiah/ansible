@@ -1,2 +1,3 @@
 - name: restart cassandra
   service: name=cassandra state=restarted enabled=yes
+  when: disable_cassandra_start is undefined
