@@ -289,7 +289,7 @@ seed_provider:
       parameters:
           # seeds is actually a comma-delimited list of addresses.
           # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: "127.0.0.1"
+          - seeds: {{ cassandra_seeds_ips | default('127.0.0.1') }}
 # For workloads with more data than can fit in memory, Cassandra's
 # bottleneck will be reads that need to fetch data from
 # disk. "concurrent_reads" should be set to (16 * number_of_drives) in
@@ -709,7 +709,7 @@ cross_node_timeout: false
 #
 # You can use a custom Snitch by setting this to the full class name
 # of the snitch, which will be assumed to be on your classpath.
-endpoint_snitch: SimpleSnitch
+endpoint_snitch: {{ cassandra_endpoint_snitch || default('SimpleSnitch') }}
 # controls how often to perform the more expensive part of host score
 # calculation
 dynamic_snitch_update_interval_in_ms: 100
@@ -843,3 +843,5 @@ enable_user_defined_functions: false
 # below their system default. The sysinternals 'clockres' tool can confirm your system's default
 # setting.
 windows_timer_interval: 1
+
+auto_bootstrap: {{ cassandra_auto_bootstrap | default('true') }}
