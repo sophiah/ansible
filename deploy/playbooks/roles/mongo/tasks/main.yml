@@ -1,0 +1,12 @@
+--
+## main.yml for mongo
+
+- name: install yum repo file
+  copy: src="{{ item }}" dest="/etc/yum.repos.d/{{ item }}"
+  with_items:
+    - mongodb-repo-3.2.repo
+
+- name: install necessary packages
+  yum: name={{ item }} state=present
+  with_items:
+    - mongodb-org
