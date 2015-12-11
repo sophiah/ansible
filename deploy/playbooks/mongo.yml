@@ -1,0 +1,7 @@
+---
+- hosts: mongo
+  sudo: True
+  tags: 
+    - mongo
+  roles:
+    - mongo
