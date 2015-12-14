@@ -10,3 +10,5 @@
   yum: name={{ item }} state=present
   with_items:
     - mongodb-org
+
+- include: install_mongod_conf.yml
