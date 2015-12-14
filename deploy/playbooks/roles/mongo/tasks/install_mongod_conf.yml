@@ -1,0 +1,15 @@
+---
+## install_mongod_conf.yml
+
+- name: template for mongod.conf
+  template: src=mongod.conf dest=/etc/mongod.conf mode="u=rwx,g=rx,o=rx"
+  when: mongod.conf is undefined
+  notify: restart mongo
+
+- name: template for mongod.conf custom
+  template: src={{ mongod_conf }} dest=/etc/mongod.conf mode="u=rwx,g=rx,o=rx"
+  when: mongod_conf is defined
+  notify: restart mongo
+
+- include: run_mongo_init_scripts.yml
+  when: mongodb_init_scripts is defined

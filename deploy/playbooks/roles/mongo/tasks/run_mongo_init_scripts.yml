@@ -1,0 +1,14 @@
+---
+# run_mongo_init_scripts
+
+- name: create init_scripts dir
+  file: path=/var/log/mongodb/init_scripts mode="u=rwx,g=rx,o=rx" state=directory
+
+- name: copy custom scripts first
+  copy: src="{{ item }}"  dest=/var/log/mongodb/init_scripts
+  with_fileglob: "{{ mongo_init_script_dir }}/*"
+
+- name: run custom scripts
+  shell: bash -c "/usr/bin/mongo {{ ansible_hostname }}:{{ mongo_port || default('27017') }} /var/log/mongodb/init_scripts/{{ item | basename }}"
+  with_fileglob: "{{ mongo_init_script_dir }}/*"
+
