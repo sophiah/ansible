@@ -1,3 +1,4 @@
 mongo_port: 27017
 mongo_systemlog_path: /var/log/mongodb/mongod.log
 mongo_db_path: /var/lib/mongo
+mongo_authorization: enabled
